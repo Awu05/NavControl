@@ -51,14 +51,14 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
+//#warning Incomplete method implementation.
     // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
+//#warning Incomplete method implementation.
     // Return the number of rows in the section.
     return [self.companyList count];
 }
@@ -74,6 +74,16 @@
     // Configure the cell...
     
     cell.textLabel.text = [self.companyList objectAtIndex:[indexPath row]];
+    
+    if (indexPath.row == 0){
+        [[cell imageView] setImage: [UIImage imageNamed:@"Apple_Logo.jpg"]];
+    } else if (indexPath.row == 1){
+        [[cell imageView] setImage: [UIImage imageNamed:@"Samsung_Logo.jpg"]];
+    } else if (indexPath.row == 2){
+        [[cell imageView] setImage: [UIImage imageNamed:@"OnePlus_logo.jpg"]];
+    } else if (indexPath.row == 3){
+        [[cell imageView] setImage: [UIImage imageNamed:@"Xiaomi_logo.jpg"]];
+    }
     
     return cell;
 }

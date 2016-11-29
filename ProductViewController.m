@@ -43,7 +43,7 @@
     } else if ([self.title isEqualToString:@"Samsung mobile devices"]){
         self.products = @[@"Galaxy S4", @"Galaxy Note", @"Galaxy Tab"];
     } else if ([self.title isEqualToString:@"OnePlus Mobile Devices"]) {
-        self.products = @[@"OnePlusOne", @"OnePlus 2",@"OnePlus 3"];
+        self.products = @[@"OnePlus X", @"OnePlus 2",@"OnePlus 3"];
     } else if ([self.title isEqualToString:@"XiaoMi Mobile Devices"]){
         self.products = @[@"Mi Note 2", @"Mi 5", @"Mi Max"];
     }
@@ -60,14 +60,14 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
+//#warning Potentially incomplete method implementation.
     // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
+//#warning Incomplete method implementation.
     // Return the number of rows in the section.
     return [self.products count];
 }
@@ -81,6 +81,37 @@
     }
     // Configure the cell...
     cell.textLabel.text = [self.products objectAtIndex:[indexPath row]];
+    
+    if ([cell.textLabel.text isEqualToString:@"iPad"]){
+        [[cell imageView] setImage: [UIImage imageNamed:@"ipad.jpg"]];
+    } else if ([cell.textLabel.text isEqualToString:@"iPod Touch"]){
+        [[cell imageView] setImage: [UIImage imageNamed:@"ipod_touch.jpg"]];
+    } else if ([cell.textLabel.text isEqualToString:@"iPhone"]){
+        [[cell imageView] setImage: [UIImage imageNamed:@"iphone7.jpg"]];
+    }
+    else if ([cell.textLabel.text isEqualToString:@"Galaxy S4"]){
+        [[cell imageView] setImage: [UIImage imageNamed:@"samsung_s4.jpg"]];
+    } else if ([cell.textLabel.text isEqualToString:@"Galaxy Note"]){
+        [[cell imageView] setImage: [UIImage imageNamed:@"samsung_note.jpg"]];
+    } else if ([cell.textLabel.text isEqualToString:@"Galaxy Tab"]){
+        [[cell imageView] setImage: [UIImage imageNamed:@"samsung_tab.jpg"]];
+    }
+    else if ([cell.textLabel.text isEqualToString:@"OnePlus X"]){
+        [[cell imageView] setImage: [UIImage imageNamed:@"oneplus-x.jpg"]];
+    } else if ([cell.textLabel.text isEqualToString:@"OnePlus 2"]){
+        [[cell imageView] setImage: [UIImage imageNamed:@"oneplus-2.jpg"]];
+    } else if ([cell.textLabel.text isEqualToString:@"OnePlus 3"]){
+        [[cell imageView] setImage: [UIImage imageNamed:@"oneplus-3t.jpg"]];
+    }
+    else if ([cell.textLabel.text isEqualToString:@"Mi Note 2"]){
+        [[cell imageView] setImage: [UIImage imageNamed:@"mi_note2.jpg"]];
+    } else if ([cell.textLabel.text isEqualToString:@"Mi 5"]){
+        [[cell imageView] setImage: [UIImage imageNamed:@"mi5.jpg"]];
+    } else if ([cell.textLabel.text isEqualToString:@"Mi Max"]){
+        [[cell imageView] setImage: [UIImage imageNamed:@"mi_max.jpg"]];
+    }
+
+    
     return cell;
 }
 
