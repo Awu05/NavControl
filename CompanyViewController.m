@@ -35,7 +35,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    self.companyList = @[@"Apple mobile devices",@"Samsung mobile devices", @"OnePlus Mobile Devices", @"XiaoMi Mobile Devices"];
+    self.companyList = [NSMutableArray arrayWithObjects: @"Apple mobile devices",@"Samsung mobile devices", @"OnePlus Mobile Devices", @"XiaoMi Mobile Devices", nil];
     self.title = @"Mobile device makers";
     
     
@@ -75,13 +75,13 @@
     
     cell.textLabel.text = [self.companyList objectAtIndex:[indexPath row]];
     
-    if (indexPath.row == 0){
+    if ([cell.textLabel.text isEqualToString:@"Apple mobile devices"]){
         [[cell imageView] setImage: [UIImage imageNamed:@"Apple_Logo.jpg"]];
-    } else if (indexPath.row == 1){
+    } else if ([cell.textLabel.text isEqualToString:@"Samsung mobile devices"]){
         [[cell imageView] setImage: [UIImage imageNamed:@"Samsung_Logo.jpg"]];
-    } else if (indexPath.row == 2){
+    } else if ([cell.textLabel.text isEqualToString:@"OnePlus Mobile Devices"]){
         [[cell imageView] setImage: [UIImage imageNamed:@"OnePlus_logo.jpg"]];
-    } else if (indexPath.row == 3){
+    } else if ([cell.textLabel.text isEqualToString:@"XiaoMi Mobile Devices"]){
         [[cell imageView] setImage: [UIImage imageNamed:@"Xiaomi_logo.jpg"]];
     }
     
@@ -135,13 +135,13 @@
 {
 
 
-    if (indexPath.row == 0){
+    if ([[self.companyList objectAtIndex:[indexPath row]] isEqualToString:@"Apple mobile devices"]){
         self.productViewController.title = @"Apple mobile devices";
-    } else if (indexPath.row == 1){
+    } else if ([[self.companyList objectAtIndex:[indexPath row]] isEqualToString:@"Samsung mobile devices"]){
         self.productViewController.title = @"Samsung mobile devices";
-    } else if (indexPath.row == 2){
+    } else if ([[self.companyList objectAtIndex:[indexPath row]] isEqualToString:@"OnePlus Mobile Devices"]){
         self.productViewController.title = @"OnePlus Mobile Devices";
-    } else if (indexPath.row == 3){
+    } else if ([[self.companyList objectAtIndex:[indexPath row]] isEqualToString:@"XiaoMi Mobile Devices"]){
         self.productViewController.title = @"XiaoMi Mobile Devices";
     }
     
@@ -152,6 +152,28 @@
 
 }
  
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        //remove the deleted object from your data source.
+        //If your data source is an NSMutableArray, do this
+        [self.companyList removeObjectAtIndex:[indexPath row]];
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+        [tableView reloadData]; // tell table to refresh now
+    }
+}
+
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
+    NSString *stringToMove = [self.companyList objectAtIndex:sourceIndexPath.row];
+    [self.companyList removeObjectAtIndex:sourceIndexPath.row];
+    [self.companyList insertObject:stringToMove atIndex:destinationIndexPath.row];
+}
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "ProductViewController.h"
+#import "ProductPageViewController.h"
 
 @interface ProductViewController ()
 
@@ -32,6 +33,14 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    self.apple = [NSMutableArray arrayWithObjects: @"iPad", @"iPod Touch",@"iPhone", nil];
+    
+    self.samsung = [NSMutableArray arrayWithObjects: @"Galaxy S4", @"Galaxy Note", @"Galaxy Tab", nil];
+    
+    self.oneplus = [NSMutableArray arrayWithObjects: @"OnePlus X", @"OnePlus 2",@"OnePlus 3", nil];
+    
+    self.xiaomi = [NSMutableArray arrayWithObjects: @"Mi Note 2", @"Mi 5", @"Mi Max", nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -39,13 +48,13 @@
     [super viewWillAppear:animated];
     
     if ([self.title isEqualToString:@"Apple mobile devices"]) {
-        self.products = @[@"iPad", @"iPod Touch",@"iPhone"];
+        self.products = self.apple;
     } else if ([self.title isEqualToString:@"Samsung mobile devices"]){
-        self.products = @[@"Galaxy S4", @"Galaxy Note", @"Galaxy Tab"];
+        self.products = self.samsung;
     } else if ([self.title isEqualToString:@"OnePlus Mobile Devices"]) {
-        self.products = @[@"OnePlus X", @"OnePlus 2",@"OnePlus 3"];
+        self.products = self.oneplus;
     } else if ([self.title isEqualToString:@"XiaoMi Mobile Devices"]){
-        self.products = @[@"Mi Note 2", @"Mi 5", @"Mi Max"];
+        self.products = self.xiaomi;
     }
     [self.tableView reloadData];
 }
@@ -154,7 +163,7 @@
 }
 */
 
-/*
+
 #pragma mark - Table view delegate
 
 // In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
@@ -162,14 +171,101 @@
 {
     // Navigation logic may go here, for example:
     // Create the next view controller.
-    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
+    
+    self.productPageViewController = [[ProductPageViewController alloc] init];
 
+    if([self.title isEqualToString:@"Apple mobile devices"]){
+        switch (indexPath.row) {
+            case 0:
+                self.productPageViewController.title = @"iPad";
+                break;
+            case 1:
+                self.productPageViewController.title = @"iPod Touch";
+                break;
+            case 2:
+                self.productPageViewController.title = @"iPhone";
+                break;
+            default:
+                break;
+        }
+    } else if([self.title isEqualToString:@"Samsung mobile devices"]){
+        switch (indexPath.row) {
+            case 0:
+                self.productPageViewController.title = @"Galaxy S4";
+                break;
+            case 1:
+                self.productPageViewController.title = @"Galaxy Note";
+                break;
+            case 2:
+                self.productPageViewController.title = @"Galaxy Tab";
+                break;
+            default:
+                break;
+        }
+    } else if([self.title isEqualToString:@"OnePlus Mobile Devices"]){
+        switch (indexPath.row) {
+            case 0:
+                self.productPageViewController.title = @"OnePlus X";
+                break;
+            case 1:
+                self.productPageViewController.title = @"OnePlus 2";
+                break;
+            case 2:
+                self.productPageViewController.title = @"OnePlus 3";
+                break;
+            default:
+                break;
+        }
+    } else if([self.title isEqualToString:@"XiaoMi Mobile Devices"]){
+        switch (indexPath.row) {
+            case 0:
+                self.productPageViewController.title = @"Mi Note 2";
+                break;
+            case 1:
+                self.productPageViewController.title = @"Mi 5";
+                break;
+            case 2:
+                self.productPageViewController.title = @"Mi Max";
+                break;
+            default:
+                break;
+        }
+    }
+    
+    
+    [self.navigationController
+     pushViewController:self.productPageViewController
+     animated:YES];
+    
     // Pass the selected object to the new view controller.
     
     // Push the view controller.
-    [self.navigationController pushViewController:detailViewController animated:YES];
+
 }
- 
- */
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        //remove the deleted object from your data source.
+        //If your data source is an NSMutableArray, do this
+        [self.products removeObjectAtIndex:[indexPath row]];
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+        [tableView reloadData]; // tell table to refresh now
+    }
+}
+
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
+    NSString *stringToMove = [self.products objectAtIndex:sourceIndexPath.row];
+    [self.products removeObjectAtIndex:sourceIndexPath.row];
+    [self.products insertObject:stringToMove atIndex:destinationIndexPath.row];
+}
 
 @end
