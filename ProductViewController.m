@@ -40,8 +40,12 @@
     
     if ([self.title isEqualToString:@"Apple mobile devices"]) {
         self.products = @[@"iPad", @"iPod Touch",@"iPhone"];
-    } else {
+    } else if ([self.title isEqualToString:@"Samsung mobile devices"]){
         self.products = @[@"Galaxy S4", @"Galaxy Note", @"Galaxy Tab"];
+    } else if ([self.title isEqualToString:@"OnePlus Mobile Devices"]) {
+        self.products = @[@"OnePlusOne", @"OnePlus 2",@"OnePlus 3"];
+    } else if ([self.title isEqualToString:@"XiaoMi Mobile Devices"]){
+        self.products = @[@"Mi Note 2", @"Mi 5", @"Mi Max"];
     }
     [self.tableView reloadData];
 }

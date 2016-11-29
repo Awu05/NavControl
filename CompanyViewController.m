@@ -35,8 +35,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    
-    self.companyList = @[@"Apple mobile devices",@"Samsung mobile devices"];
+    self.companyList = @[@"Apple mobile devices",@"Samsung mobile devices", @"OnePlus Mobile Devices", @"XiaoMi Mobile Devices"];
     self.title = @"Mobile device makers";
     
     
@@ -128,8 +127,12 @@
 
     if (indexPath.row == 0){
         self.productViewController.title = @"Apple mobile devices";
-    } else {
+    } else if (indexPath.row == 1){
         self.productViewController.title = @"Samsung mobile devices";
+    } else if (indexPath.row == 2){
+        self.productViewController.title = @"OnePlus Mobile Devices";
+    } else if (indexPath.row == 3){
+        self.productViewController.title = @"XiaoMi Mobile Devices";
     }
     
     [self.navigationController
