@@ -175,60 +175,36 @@
     self.productPageViewController = [[ProductPageViewController alloc] init];
 
     if([self.title isEqualToString:@"Apple mobile devices"]){
-        switch (indexPath.row) {
-            case 0:
-                self.productPageViewController.title = @"iPad";
-                break;
-            case 1:
-                self.productPageViewController.title = @"iPod Touch";
-                break;
-            case 2:
-                self.productPageViewController.title = @"iPhone";
-                break;
-            default:
-                break;
+        if([[self.products objectAtIndex:[indexPath row]] isEqualToString:@"iPad"]){
+            self.productPageViewController.title = @"iPad";
+        } else if([[self.products objectAtIndex:[indexPath row]] isEqualToString:@"iPod Touch"]){
+            self.productPageViewController.title = @"iPod Touch";
+        } else if([[self.products objectAtIndex:[indexPath row]] isEqualToString:@"iPhone"]){
+            self.productPageViewController.title = @"iPhone";
         }
     } else if([self.title isEqualToString:@"Samsung mobile devices"]){
-        switch (indexPath.row) {
-            case 0:
-                self.productPageViewController.title = @"Galaxy S4";
-                break;
-            case 1:
-                self.productPageViewController.title = @"Galaxy Note";
-                break;
-            case 2:
-                self.productPageViewController.title = @"Galaxy Tab";
-                break;
-            default:
-                break;
+        if([[self.products objectAtIndex:[indexPath row]] isEqualToString:@"Galaxy S4"]){
+            self.productPageViewController.title = @"Galaxy S4";
+        } else if([[self.products objectAtIndex:[indexPath row]] isEqualToString:@"Galaxy Note"]){
+            self.productPageViewController.title = @"Galaxy Note";
+        } else if([[self.products objectAtIndex:[indexPath row]] isEqualToString:@"Galaxy Tab"]){
+            self.productPageViewController.title = @"Galaxy Tab";
         }
     } else if([self.title isEqualToString:@"OnePlus Mobile Devices"]){
-        switch (indexPath.row) {
-            case 0:
-                self.productPageViewController.title = @"OnePlus X";
-                break;
-            case 1:
-                self.productPageViewController.title = @"OnePlus 2";
-                break;
-            case 2:
-                self.productPageViewController.title = @"OnePlus 3";
-                break;
-            default:
-                break;
+        if([[self.products objectAtIndex:[indexPath row]] isEqualToString:@"OnePlus X"]){
+            self.productPageViewController.title = @"OnePlus X";
+        } else if([[self.products objectAtIndex:[indexPath row]] isEqualToString:@"OnePlus 2"]){
+            self.productPageViewController.title = @"OnePlus 2";
+        } else if([[self.products objectAtIndex:[indexPath row]] isEqualToString:@"OnePlus 3"]){
+            self.productPageViewController.title = @"OnePlus 3";
         }
     } else if([self.title isEqualToString:@"XiaoMi Mobile Devices"]){
-        switch (indexPath.row) {
-            case 0:
-                self.productPageViewController.title = @"Mi Note 2";
-                break;
-            case 1:
-                self.productPageViewController.title = @"Mi 5";
-                break;
-            case 2:
-                self.productPageViewController.title = @"Mi Max";
-                break;
-            default:
-                break;
+        if([[self.products objectAtIndex:[indexPath row]] isEqualToString:@"Mi Note 2"]){
+            self.productPageViewController.title = @"Mi Note 2";
+        } else if([[self.products objectAtIndex:[indexPath row]] isEqualToString:@"Mi 5"]){
+            self.productPageViewController.title = @"Mi 5";
+        } else if([[self.products objectAtIndex:[indexPath row]] isEqualToString:@"Mi Max"]){
+            self.productPageViewController.title = @"Mi Max";
         }
     }
     
