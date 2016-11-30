@@ -8,16 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import <WebKit/WebKit.h>
+#import "Company.h"
+#import "DataAccessObject.h"
+#import "ProductPageViewController.h"
 
-@class ProductPageViewController;
 
 @interface ProductViewController : UITableViewController
 
-@property (nonatomic, retain) NSMutableArray *products;
-@property (nonatomic, retain) NSMutableArray *apple;
-@property (nonatomic, retain) NSMutableArray *samsung;
-@property (nonatomic, retain) NSMutableArray *oneplus;
-@property (nonatomic, retain) NSMutableArray *xiaomi;
+@property (nonatomic, retain) Company *currentCompany;
+//@property (nonatomic, retain) DataAccessObject *mySharedData;
 
 @property (nonatomic, retain) IBOutlet  ProductPageViewController * productPageViewController;
 

@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DataAccessObject.h"
 
 @class ProductViewController;
 
 @interface CompanyViewController : UITableViewController
 
-@property (nonatomic, retain) NSMutableArray *companyList;
+@property (nonatomic, retain) DataAccessObject *mySharedData;
 
 @property (nonatomic, retain) IBOutlet  ProductViewController * productViewController;
 

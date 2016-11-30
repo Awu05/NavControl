@@ -8,6 +8,7 @@
 
 #import "ProductViewController.h"
 #import "ProductPageViewController.h"
+#import "Product.h"
 
 @interface ProductViewController ()
 
@@ -27,35 +28,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+//    self.mySharedData = [DataAccessObject sharedManager];
+    
     // Uncomment the following line to preserve selection between presentations.
      self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    self.apple = [NSMutableArray arrayWithObjects: @"iPad", @"iPod Touch",@"iPhone", nil];
-    
-    self.samsung = [NSMutableArray arrayWithObjects: @"Galaxy S4", @"Galaxy Note", @"Galaxy Tab", nil];
-    
-    self.oneplus = [NSMutableArray arrayWithObjects: @"OnePlus X", @"OnePlus 2",@"OnePlus 3", nil];
-    
-    self.xiaomi = [NSMutableArray arrayWithObjects: @"Mi Note 2", @"Mi 5", @"Mi Max", nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
     
-    if ([self.title isEqualToString:@"Apple mobile devices"]) {
-        self.products = self.apple;
-    } else if ([self.title isEqualToString:@"Samsung mobile devices"]){
-        self.products = self.samsung;
-    } else if ([self.title isEqualToString:@"OnePlus Mobile Devices"]) {
-        self.products = self.oneplus;
-    } else if ([self.title isEqualToString:@"XiaoMi Mobile Devices"]){
-        self.products = self.xiaomi;
-    }
     [self.tableView reloadData];
 }
 
@@ -78,7 +64,7 @@
 {
 //#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return [self.products count];
+    return [self.currentCompany.productList count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -89,37 +75,11 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     // Configure the cell...
-    cell.textLabel.text = [self.products objectAtIndex:[indexPath row]];
+    Product *companyProduct = [self.currentCompany.productList objectAtIndex:[indexPath row]];
     
-    if ([cell.textLabel.text isEqualToString:@"iPad"]){
-        [[cell imageView] setImage: [UIImage imageNamed:@"ipad.jpg"]];
-    } else if ([cell.textLabel.text isEqualToString:@"iPod Touch"]){
-        [[cell imageView] setImage: [UIImage imageNamed:@"ipod_touch.jpg"]];
-    } else if ([cell.textLabel.text isEqualToString:@"iPhone"]){
-        [[cell imageView] setImage: [UIImage imageNamed:@"iphone7.jpg"]];
-    }
-    else if ([cell.textLabel.text isEqualToString:@"Galaxy S4"]){
-        [[cell imageView] setImage: [UIImage imageNamed:@"samsung_s4.jpg"]];
-    } else if ([cell.textLabel.text isEqualToString:@"Galaxy Note"]){
-        [[cell imageView] setImage: [UIImage imageNamed:@"samsung_note.jpg"]];
-    } else if ([cell.textLabel.text isEqualToString:@"Galaxy Tab"]){
-        [[cell imageView] setImage: [UIImage imageNamed:@"samsung_tab.jpg"]];
-    }
-    else if ([cell.textLabel.text isEqualToString:@"OnePlus X"]){
-        [[cell imageView] setImage: [UIImage imageNamed:@"oneplus-x.jpg"]];
-    } else if ([cell.textLabel.text isEqualToString:@"OnePlus 2"]){
-        [[cell imageView] setImage: [UIImage imageNamed:@"oneplus-2.jpg"]];
-    } else if ([cell.textLabel.text isEqualToString:@"OnePlus 3"]){
-        [[cell imageView] setImage: [UIImage imageNamed:@"oneplus-3t.jpg"]];
-    }
-    else if ([cell.textLabel.text isEqualToString:@"Mi Note 2"]){
-        [[cell imageView] setImage: [UIImage imageNamed:@"mi_note2.jpg"]];
-    } else if ([cell.textLabel.text isEqualToString:@"Mi 5"]){
-        [[cell imageView] setImage: [UIImage imageNamed:@"mi5.jpg"]];
-    } else if ([cell.textLabel.text isEqualToString:@"Mi Max"]){
-        [[cell imageView] setImage: [UIImage imageNamed:@"mi_max.jpg"]];
-    }
-
+    cell.imageView.image = companyProduct.productImage;
+    
+    cell.textLabel.text = companyProduct.productName;
     
     return cell;
 }
@@ -173,50 +133,21 @@
     // Create the next view controller.
     
     self.productPageViewController = [[ProductPageViewController alloc] init];
-
-    if([self.title isEqualToString:@"Apple mobile devices"]){
-        if([[self.products objectAtIndex:[indexPath row]] isEqualToString:@"iPad"]){
-            self.productPageViewController.title = @"iPad";
-        } else if([[self.products objectAtIndex:[indexPath row]] isEqualToString:@"iPod Touch"]){
-            self.productPageViewController.title = @"iPod Touch";
-        } else if([[self.products objectAtIndex:[indexPath row]] isEqualToString:@"iPhone"]){
-            self.productPageViewController.title = @"iPhone";
-        }
-    } else if([self.title isEqualToString:@"Samsung mobile devices"]){
-        if([[self.products objectAtIndex:[indexPath row]] isEqualToString:@"Galaxy S4"]){
-            self.productPageViewController.title = @"Galaxy S4";
-        } else if([[self.products objectAtIndex:[indexPath row]] isEqualToString:@"Galaxy Note"]){
-            self.productPageViewController.title = @"Galaxy Note";
-        } else if([[self.products objectAtIndex:[indexPath row]] isEqualToString:@"Galaxy Tab"]){
-            self.productPageViewController.title = @"Galaxy Tab";
-        }
-    } else if([self.title isEqualToString:@"OnePlus Mobile Devices"]){
-        if([[self.products objectAtIndex:[indexPath row]] isEqualToString:@"OnePlus X"]){
-            self.productPageViewController.title = @"OnePlus X";
-        } else if([[self.products objectAtIndex:[indexPath row]] isEqualToString:@"OnePlus 2"]){
-            self.productPageViewController.title = @"OnePlus 2";
-        } else if([[self.products objectAtIndex:[indexPath row]] isEqualToString:@"OnePlus 3"]){
-            self.productPageViewController.title = @"OnePlus 3";
-        }
-    } else if([self.title isEqualToString:@"XiaoMi Mobile Devices"]){
-        if([[self.products objectAtIndex:[indexPath row]] isEqualToString:@"Mi Note 2"]){
-            self.productPageViewController.title = @"Mi Note 2";
-        } else if([[self.products objectAtIndex:[indexPath row]] isEqualToString:@"Mi 5"]){
-            self.productPageViewController.title = @"Mi 5";
-        } else if([[self.products objectAtIndex:[indexPath row]] isEqualToString:@"Mi Max"]){
-            self.productPageViewController.title = @"Mi Max";
-        }
-    }
     
+    Product *product = [self.currentCompany.productList objectAtIndex:[indexPath row]];
+    
+    self.productPageViewController.title = product.productName;
+    
+    self.productPageViewController.product = product;
+    
+    // Pass the selected object to the new view controller.
+    
+    // Push the view controller.
     
     [self.navigationController
      pushViewController:self.productPageViewController
      animated:YES];
     
-    // Pass the selected object to the new view controller.
-    
-    // Push the view controller.
-
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -227,7 +158,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         //remove the deleted object from your data source.
         //If your data source is an NSMutableArray, do this
-        [self.products removeObjectAtIndex:[indexPath row]];
+        [self.currentCompany.productList removeObjectAtIndex:[indexPath row]];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
         [tableView reloadData]; // tell table to refresh now
     }
@@ -239,9 +170,9 @@
 
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
-    NSString *stringToMove = [self.products objectAtIndex:sourceIndexPath.row];
-    [self.products removeObjectAtIndex:sourceIndexPath.row];
-    [self.products insertObject:stringToMove atIndex:destinationIndexPath.row];
+    NSString *stringToMove = [self.currentCompany.productList objectAtIndex:sourceIndexPath.row];
+    [self.currentCompany.productList removeObjectAtIndex:sourceIndexPath.row];
+    [self.currentCompany.productList insertObject:stringToMove atIndex:destinationIndexPath.row];
 }
 
 @end

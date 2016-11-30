@@ -8,6 +8,8 @@
 
 #import "CompanyViewController.h"
 #import "ProductViewController.h"
+#import "Company.h"
+#import "Product.h"
 
 @interface CompanyViewController ()
 
@@ -29,13 +31,14 @@
 {
     [super viewDidLoad];
 
+    self.mySharedData = [DataAccessObject sharedManager];
+    
     // Uncomment the following line to preserve selection between presentations.
      self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    self.companyList = [NSMutableArray arrayWithObjects: @"Apple mobile devices",@"Samsung mobile devices", @"OnePlus Mobile Devices", @"XiaoMi Mobile Devices", nil];
     self.title = @"Mobile device makers";
     
     
@@ -60,7 +63,7 @@
 {
 //#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return [self.companyList count];
+    return [self.mySharedData.companyList count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -72,18 +75,9 @@
     }
     
     // Configure the cell...
-    
-    cell.textLabel.text = [self.companyList objectAtIndex:[indexPath row]];
-    
-    if ([cell.textLabel.text isEqualToString:@"Apple mobile devices"]){
-        [[cell imageView] setImage: [UIImage imageNamed:@"Apple_Logo.jpg"]];
-    } else if ([cell.textLabel.text isEqualToString:@"Samsung mobile devices"]){
-        [[cell imageView] setImage: [UIImage imageNamed:@"Samsung_Logo.jpg"]];
-    } else if ([cell.textLabel.text isEqualToString:@"OnePlus Mobile Devices"]){
-        [[cell imageView] setImage: [UIImage imageNamed:@"OnePlus_logo.jpg"]];
-    } else if ([cell.textLabel.text isEqualToString:@"XiaoMi Mobile Devices"]){
-        [[cell imageView] setImage: [UIImage imageNamed:@"Xiaomi_logo.jpg"]];
-    }
+    Company *company = [self.mySharedData.companyList objectAtIndex:[indexPath row]];
+    cell.textLabel.text = company.name;
+    cell.imageView.image = company.image;
     
     return cell;
 }
@@ -133,17 +127,9 @@
 // In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
-
-    if ([[self.companyList objectAtIndex:[indexPath row]] isEqualToString:@"Apple mobile devices"]){
-        self.productViewController.title = @"Apple mobile devices";
-    } else if ([[self.companyList objectAtIndex:[indexPath row]] isEqualToString:@"Samsung mobile devices"]){
-        self.productViewController.title = @"Samsung mobile devices";
-    } else if ([[self.companyList objectAtIndex:[indexPath row]] isEqualToString:@"OnePlus Mobile Devices"]){
-        self.productViewController.title = @"OnePlus Mobile Devices";
-    } else if ([[self.companyList objectAtIndex:[indexPath row]] isEqualToString:@"XiaoMi Mobile Devices"]){
-        self.productViewController.title = @"XiaoMi Mobile Devices";
-    }
+    Company *company = [self.mySharedData.companyList objectAtIndex:[indexPath row]];
+    
+    self.productViewController.currentCompany = company;
     
     [self.navigationController
         pushViewController:self.productViewController
@@ -160,7 +146,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         //remove the deleted object from your data source.
         //If your data source is an NSMutableArray, do this
-        [self.companyList removeObjectAtIndex:[indexPath row]];
+        [self.mySharedData.companyList removeObjectAtIndex:[indexPath row]];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
         [tableView reloadData]; // tell table to refresh now
     }
@@ -171,9 +157,9 @@
 }
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
-    NSString *stringToMove = [self.companyList objectAtIndex:sourceIndexPath.row];
-    [self.companyList removeObjectAtIndex:sourceIndexPath.row];
-    [self.companyList insertObject:stringToMove atIndex:destinationIndexPath.row];
+    NSString *stringToMove = [self.mySharedData.companyList objectAtIndex:sourceIndexPath.row];
+    [self.mySharedData.companyList removeObjectAtIndex:sourceIndexPath.row];
+    [self.mySharedData.companyList insertObject:stringToMove atIndex:destinationIndexPath.row];
 }
 
 @end
