@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import <WebKit/WebKit.h>
+#import "Product.h"
+#import "DataAccessObject.h"
 
 @interface ProductPageViewController : UIViewController <WKNavigationDelegate>
 
 @property (strong, nonatomic) WKWebView *webView;
-@property (strong, nonatomic) NSString *productURL;
+//@property (nonatomic, retain) DataAccessObject *mySharedData;
+
+@property (nonatomic, retain) Product *product;
 
 @end

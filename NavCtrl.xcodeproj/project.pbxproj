@@ -24,6 +24,9 @@
 		48A656EB18163F8700746D36 /* ProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48A656E918163F8700746D36 /* ProductViewController.m */; };
 		48A656EE1816468000746D36 /* Sunflower.gif in Resources */ = {isa = PBXBuildFile; fileRef = 48A656ED1816468000746D36 /* Sunflower.gif */; };
 		E818867F1DEE10F500759706 /* ProductPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E818867E1DEE10F500759706 /* ProductPageViewController.m */; };
+		E8BA741E1DEF3BA700FDA620 /* Company.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BA741D1DEF3BA700FDA620 /* Company.m */; };
+		E8BA74211DEF3BC900FDA620 /* Product.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BA74201DEF3BC900FDA620 /* Product.m */; };
+		E8BA74261DEF466D00FDA620 /* DataAccessObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BA74251DEF466D00FDA620 /* DataAccessObject.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +64,12 @@
 		48A656ED1816468000746D36 /* Sunflower.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Sunflower.gif; sourceTree = "<group>"; };
 		E818867D1DEE10F500759706 /* ProductPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductPageViewController.h; sourceTree = "<group>"; };
 		E818867E1DEE10F500759706 /* ProductPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductPageViewController.m; sourceTree = "<group>"; };
+		E8BA741C1DEF3BA700FDA620 /* Company.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Company.h; sourceTree = "<group>"; };
+		E8BA741D1DEF3BA700FDA620 /* Company.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Company.m; sourceTree = "<group>"; };
+		E8BA741F1DEF3BC900FDA620 /* Product.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Product.h; sourceTree = "<group>"; };
+		E8BA74201DEF3BC900FDA620 /* Product.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Product.m; sourceTree = "<group>"; };
+		E8BA74241DEF466D00FDA620 /* DataAccessObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataAccessObject.h; sourceTree = "<group>"; };
+		E8BA74251DEF466D00FDA620 /* DataAccessObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataAccessObject.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +160,9 @@
 				483796CC1BCBF7C70062D5AB /* ParentViewController */,
 				483796CD1BCBF7EB0062D5AB /* ProductViewController */,
 				E81886801DEE110900759706 /* ProductPageViewController */,
+				E8BA74271DEF467200FDA620 /* DataGroup */,
+				E8BA74221DEF3BCE00FDA620 /* CompanyClass */,
+				E8BA74231DEF3BF000FDA620 /* ProductClass */,
 				48A656C618163BF200746D36 /* Images.xcassets */,
 				48A656E518163C1B00746D36 /* CompanyViewController.xib */,
 				48A656BB18163BF200746D36 /* Supporting Files */,
@@ -195,6 +207,33 @@
 				E818867E1DEE10F500759706 /* ProductPageViewController.m */,
 			);
 			name = ProductPageViewController;
+			sourceTree = "<group>";
+		};
+		E8BA74221DEF3BCE00FDA620 /* CompanyClass */ = {
+			isa = PBXGroup;
+			children = (
+				E8BA741C1DEF3BA700FDA620 /* Company.h */,
+				E8BA741D1DEF3BA700FDA620 /* Company.m */,
+			);
+			name = CompanyClass;
+			sourceTree = "<group>";
+		};
+		E8BA74231DEF3BF000FDA620 /* ProductClass */ = {
+			isa = PBXGroup;
+			children = (
+				E8BA741F1DEF3BC900FDA620 /* Product.h */,
+				E8BA74201DEF3BC900FDA620 /* Product.m */,
+			);
+			name = ProductClass;
+			sourceTree = "<group>";
+		};
+		E8BA74271DEF467200FDA620 /* DataGroup */ = {
+			isa = PBXGroup;
+			children = (
+				E8BA74241DEF466D00FDA620 /* DataAccessObject.h */,
+				E8BA74251DEF466D00FDA620 /* DataAccessObject.m */,
+			);
+			name = DataGroup;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -295,7 +334,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8BA74261DEF466D00FDA620 /* DataAccessObject.m in Sources */,
+				E8BA74211DEF3BC900FDA620 /* Product.m in Sources */,
 				48A656E618163C1B00746D36 /* CompanyViewController.m in Sources */,
+				E8BA741E1DEF3BA700FDA620 /* Company.m in Sources */,
 				48A656C518163BF200746D36 /* NavControllerAppDelegate.m in Sources */,
 				E818867F1DEE10F500759706 /* ProductPageViewController.m in Sources */,
 				48A656C118163BF200746D36 /* main.m in Sources */,
