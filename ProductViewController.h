@@ -18,6 +18,6 @@
 @property (nonatomic, retain) Company *currentCompany;
 //@property (nonatomic, retain) DataAccessObject *mySharedData;
 
-@property (nonatomic, retain) IBOutlet  ProductPageViewController * productPageViewController;
+@property (nonatomic, retain) IBOutlet ProductPageViewController *productPageViewController;
 
 @end

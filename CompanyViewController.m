@@ -10,6 +10,7 @@
 #import "ProductViewController.h"
 #import "Company.h"
 #import "Product.h"
+#import "AddEditViewController.h"
 
 @interface CompanyViewController ()
 
@@ -33,15 +34,27 @@
 
     self.mySharedData = [DataAccessObject sharedManager];
     
+    UIBarButtonItem *addButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addAction:)];
+    self.navigationItem.rightBarButtonItem = addButtonItem;
+    
+    
     // Uncomment the following line to preserve selection between presentations.
      self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    
     
     self.title = @"Mobile device makers";
     
     
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -82,45 +95,13 @@
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (void) addAction: (id)sender {
+    
+    AddEditViewController *addEdit = [[AddEditViewController alloc] init];
+    addEdit.title = @"New Company";
+    [self.navigationController pushViewController:addEdit animated:YES];
+    
 }
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 
 #pragma mark - Table view delegate
 
@@ -129,11 +110,20 @@
 {
     Company *company = [self.mySharedData.companyList objectAtIndex:[indexPath row]];
     
-    self.productViewController.currentCompany = company;
+    if(tableView.editing == YES) {
+        AddEditViewController *addEdit = [[AddEditViewController alloc] init];
+        addEdit.title = @"Edit Company";
+        addEdit.editCompany = company;
+        [self.navigationController pushViewController:addEdit animated:YES];
+    }
+    else {
+        self.productViewController.currentCompany = company;
+        
+        [self.navigationController
+         pushViewController:self.productViewController
+         animated:YES];
+    }
     
-    [self.navigationController
-        pushViewController:self.productViewController
-        animated:YES];
     
 
 }
@@ -143,6 +133,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         //remove the deleted object from your data source.
         //If your data source is an NSMutableArray, do this
@@ -150,7 +141,12 @@
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
         [tableView reloadData]; // tell table to refresh now
     }
+    else {
+        
+    }
+    
 }
+
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;

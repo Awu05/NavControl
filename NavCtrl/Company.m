@@ -28,6 +28,7 @@
     if (self) {
         self.name = name;
         self.image = [UIImage imageNamed:logoName];
+        self.logoURL = logoName;
         self.productList = prodList;
     }
     return self;

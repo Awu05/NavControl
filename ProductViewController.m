@@ -9,6 +9,7 @@
 #import "ProductViewController.h"
 #import "ProductPageViewController.h"
 #import "Product.h"
+#import "AddEditViewController.h"
 
 @interface ProductViewController ()
 
@@ -34,7 +35,10 @@
      self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    //self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    UIBarButtonItem *addButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addAction:)];
+    self.navigationItem.rightBarButtonItem = addButtonItem;
     
 }
 
@@ -49,6 +53,15 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) addAction: (id)sender {
+    
+    AddEditViewController *addEdit = [[AddEditViewController alloc] init];
+    addEdit.title = @"New Product";
+    addEdit.editCompany = self.currentCompany;
+    [self.navigationController pushViewController:addEdit animated:YES];
+    
 }
 
 #pragma mark - Table view data source
@@ -69,6 +82,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    tableView.allowsSelectionDuringEditing = YES;
+    
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
@@ -84,66 +99,23 @@
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-
 #pragma mark - Table view delegate
 
 // In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here, for example:
-    // Create the next view controller.
+    Product *product = [self.currentCompany.productList objectAtIndex:[indexPath row]];
     
     self.productPageViewController = [[ProductPageViewController alloc] init];
     
-    Product *product = [self.currentCompany.productList objectAtIndex:[indexPath row]];
-    
     self.productPageViewController.title = product.productName;
+    self.productPageViewController.currentProductCompany = self.currentCompany;
     
-    self.productPageViewController.product = product;
     
     // Pass the selected object to the new view controller.
+    self.productPageViewController.product = product;
     
     // Push the view controller.
-    
     [self.navigationController
      pushViewController:self.productPageViewController
      animated:YES];
