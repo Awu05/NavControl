@@ -170,6 +170,7 @@
     }
     //NSLog(@"Tickers: %@\n", self.tickers);
     
+    //From http://www.jarloo.com/yahoo_finance/
     NSString *tickerURL = [NSString stringWithFormat:@"http://finance.yahoo.com/d/quotes.csv?s=%@&f=a", self.tickers];
     
     // 1
