@@ -23,12 +23,14 @@
 
 - (instancetype)initWithName: (NSString*) name
                     andLogo: (NSString*) logoName
-                andProdList: (NSMutableArray *) prodList{
+                andProdList: (NSMutableArray *) prodList
+                andStockName: (NSString*) ticker {
     self = [super init];
     if (self) {
         self.name = name;
         self.image = [UIImage imageNamed:logoName];
         self.productList = prodList;
+        self.stockName = ticker;
     }
     return self;
 }

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <WebKit/WebKit.h>
 #import "Product.h"
-#import "DataAccessObject.h"
+#import "Company.h"
 
 @interface ProductPageViewController : UIViewController <WKNavigationDelegate>
 
@@ -17,5 +17,9 @@
 //@property (nonatomic, retain) DataAccessObject *mySharedData;
 
 @property (nonatomic, retain) Product *product;
+
+@property (nonatomic, retain) Company *currentProductCompany;
+
+
 
 @end

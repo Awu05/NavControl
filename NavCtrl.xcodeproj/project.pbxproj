@@ -27,6 +27,8 @@
 		E8BA741E1DEF3BA700FDA620 /* Company.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BA741D1DEF3BA700FDA620 /* Company.m */; };
 		E8BA74211DEF3BC900FDA620 /* Product.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BA74201DEF3BC900FDA620 /* Product.m */; };
 		E8BA74261DEF466D00FDA620 /* DataAccessObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BA74251DEF466D00FDA620 /* DataAccessObject.m */; };
+		E8BA74341DF083AB00FDA620 /* AddEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BA74321DF083AB00FDA620 /* AddEditViewController.m */; };
+		E8BA74351DF083AB00FDA620 /* AddEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E8BA74331DF083AB00FDA620 /* AddEditViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +72,9 @@
 		E8BA74201DEF3BC900FDA620 /* Product.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Product.m; sourceTree = "<group>"; };
 		E8BA74241DEF466D00FDA620 /* DataAccessObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataAccessObject.h; sourceTree = "<group>"; };
 		E8BA74251DEF466D00FDA620 /* DataAccessObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataAccessObject.m; sourceTree = "<group>"; };
+		E8BA74311DF083AB00FDA620 /* AddEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddEditViewController.h; path = ../AddEditViewController.h; sourceTree = "<group>"; };
+		E8BA74321DF083AB00FDA620 /* AddEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddEditViewController.m; path = ../AddEditViewController.m; sourceTree = "<group>"; };
+		E8BA74331DF083AB00FDA620 /* AddEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddEditViewController.xib; path = ../AddEditViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +165,7 @@
 				483796CC1BCBF7C70062D5AB /* ParentViewController */,
 				483796CD1BCBF7EB0062D5AB /* ProductViewController */,
 				E81886801DEE110900759706 /* ProductPageViewController */,
+				E8BA74281DF07EB400FDA620 /* AddEditViewController */,
 				E8BA74271DEF467200FDA620 /* DataGroup */,
 				E8BA74221DEF3BCE00FDA620 /* CompanyClass */,
 				E8BA74231DEF3BF000FDA620 /* ProductClass */,
@@ -234,6 +240,16 @@
 				E8BA74251DEF466D00FDA620 /* DataAccessObject.m */,
 			);
 			name = DataGroup;
+			sourceTree = "<group>";
+		};
+		E8BA74281DF07EB400FDA620 /* AddEditViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E8BA74311DF083AB00FDA620 /* AddEditViewController.h */,
+				E8BA74321DF083AB00FDA620 /* AddEditViewController.m */,
+				E8BA74331DF083AB00FDA620 /* AddEditViewController.xib */,
+			);
+			name = AddEditViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -315,6 +331,7 @@
 				48A656EE1816468000746D36 /* Sunflower.gif in Resources */,
 				48A656E718163C1B00746D36 /* CompanyViewController.xib in Resources */,
 				48A656BF18163BF200746D36 /* InfoPlist.strings in Resources */,
+				E8BA74351DF083AB00FDA620 /* AddEditViewController.xib in Resources */,
 				48A656C718163BF200746D36 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -336,6 +353,7 @@
 			files = (
 				E8BA74261DEF466D00FDA620 /* DataAccessObject.m in Sources */,
 				E8BA74211DEF3BC900FDA620 /* Product.m in Sources */,
+				E8BA74341DF083AB00FDA620 /* AddEditViewController.m in Sources */,
 				48A656E618163C1B00746D36 /* CompanyViewController.m in Sources */,
 				E8BA741E1DEF3BA700FDA620 /* Company.m in Sources */,
 				48A656C518163BF200746D36 /* NavControllerAppDelegate.m in Sources */,
