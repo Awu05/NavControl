@@ -16,10 +16,13 @@
 @property (nonatomic, retain) UIImage *image;
 @property (nonatomic, retain) NSMutableArray *productList;
 @property (nonatomic, retain) NSString *logoURL;
+@property (nonatomic, retain) NSString *stockName;
+@property double stockPrice;
 
 - (instancetype)initWithName: (NSString*) name
                      andLogo: (NSString*) logoName
-                 andProdList: (NSMutableArray*) prodList;
+                 andProdList: (NSMutableArray*) prodList
+                andStockName: (NSString*) ticker;
 
 
 @end

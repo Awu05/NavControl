@@ -36,7 +36,7 @@
         
         NSMutableArray *appleProducts = [NSMutableArray arrayWithObjects:iPad, iPod_Touch, iPhone, nil];
         
-        Company *apple = [[Company alloc] initWithName:@"Apple Mobile Devices" andLogo:@"Apple_Logo.jpg" andProdList:appleProducts];
+        Company *apple = [[Company alloc] initWithName:@"Apple Mobile Devices" andLogo:@"Apple_Logo.jpg" andProdList:appleProducts andStockName:@"AAPL"];
         
         [self.companyList addObject: apple];
         
@@ -51,39 +51,39 @@
         
         NSMutableArray *samsungProducts = [NSMutableArray arrayWithObjects:galaxyS4, galaxyNote, galaxyTab, nil];
         
-        Company *samsung = [[Company alloc] initWithName:@"Samsung Mobile Devices" andLogo:@"Samsung_Logo.jpg" andProdList:samsungProducts];
+        Company *samsung = [[Company alloc] initWithName:@"Samsung Mobile Devices" andLogo:@"Samsung_Logo.jpg" andProdList:samsungProducts andStockName:@"SMSD.L"];
         
         [self.companyList addObject: samsung];
         
         //--------------------------------------
         
-        Product *oneplus2 = [[Product alloc] initWithName:@"OnePlus 2" andImage:@"oneplus-2.jpg" andProdURL:@"https://oneplus.net/"];
+        Product *google_pixel = [[Product alloc] initWithName:@"Google Pixel" andImage:@"google_pixel.jpg" andProdURL:@"https://madeby.google.com/phone/"];
         
-        Product *oneplus3 = [[Product alloc] initWithName:@"OnePlus 3" andImage:@"oneplus-3t.jpg" andProdURL:@"https://oneplus.net/"];
+        Product *nexus6p = [[Product alloc] initWithName:@"Google Nexus 6P" andImage:@"google-nexus-6p.jpg" andProdURL:@"https://madeby.google.com/phone/"];
         
-        Product *oneplusx = [[Product alloc] initWithName:@"OnePlus X" andImage:@"oneplus-x.jpg" andProdURL:@"https://oneplus.net/"];
+        Product *nexus5x = [[Product alloc] initWithName:@"Google Nexus 5X" andImage:@"nexus-5x.jpg" andProdURL:@"https://madeby.google.com/phone/"];
         
         
-        NSMutableArray *onePlusProducts = [NSMutableArray arrayWithObjects:oneplusx, oneplus2, oneplus3, nil];
+        NSMutableArray *googleProducts = [NSMutableArray arrayWithObjects:google_pixel, nexus6p, nexus5x, nil];
         
-        Company *onePlus = [[Company alloc] initWithName:@"OnePlus Mobile Devices" andLogo:@"OnePlus_logo.jpg" andProdList:onePlusProducts];
+        Company *google = [[Company alloc] initWithName:@"Google Mobile Devices" andLogo:@"google_logo.jpg" andProdList:googleProducts andStockName:@"GOOG"];
         
-        [self.companyList addObject: onePlus];
+        [self.companyList addObject: google];
         
         //--------------------------------------
         
-        Product *mi_note = [[Product alloc] initWithName:@"Mi Note 2" andImage:@"mi_note2.jpg" andProdURL:@"http://www.mi.com/en/"];
+        Product *droid_turbo2 = [[Product alloc] initWithName:@"Motorola Droid Turbo 2" andImage:@"motorola-droid-turbo-2.jpg" andProdURL:@"https://www.motorola.com/us/products/moto-smartphones"];
         
-        Product *mi5 = [[Product alloc] initWithName:@"Mi 5" andImage:@"mi5.jpg" andProdURL:@"http://www.mi.com/en/"];
+        Product *moto_x = [[Product alloc] initWithName:@"Motorola Moto X" andImage:@"motorola-moto-x-force1.jpg" andProdURL:@"https://www.motorola.com/us/products/moto-smartphones"];
         
-        Product *mi_max = [[Product alloc] initWithName:@"Mi Max" andImage:@"mi_max.jpg" andProdURL:@"http://www.mi.com/en/"];
+        Product *moto_z = [[Product alloc] initWithName:@"Motorola Moto Z" andImage:@"motorola-moto-z.jpg" andProdURL:@"https://www.motorola.com/us/products/moto-smartphones"];
         
         
-        NSMutableArray *xiaomiProducts = [NSMutableArray arrayWithObjects:mi_note, mi5, mi_max, nil];
+        NSMutableArray *motoProducts = [NSMutableArray arrayWithObjects:droid_turbo2, moto_x, moto_z, nil];
         
-        Company *xiaoMi = [[Company alloc] initWithName:@"XiaoMi Mobile Devices" andLogo:@"Xiaomi_logo.jpg" andProdList:xiaomiProducts];
+        Company *motorola = [[Company alloc] initWithName:@"Motorola Mobile Devices" andLogo:@"motorola_logo.jpg" andProdList:motoProducts andStockName:@"MSI"];
         
-        [self.companyList addObject: xiaoMi];
+        [self.companyList addObject: motorola];
         
         //--------------------------------------
     }

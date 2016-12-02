@@ -46,14 +46,26 @@
     [self.companyName.layer addSublayer:border];
     self.companyName.layer.masksToBounds = YES;
     
+    CALayer *border2 = [CALayer layer];
+    border2.borderColor = [UIColor darkGrayColor].CGColor;
+    border2.frame = CGRectMake(0, self.productURL.frame.size.height - borderWidth, self.productURL.frame.size.width*2, self.productURL.frame.size.height);
+    border2.borderWidth = borderWidth;
+    [self.productURL.layer addSublayer:border2];
+    self.productURL.layer.masksToBounds = YES;
+    
+    self.productURL.placeholder = @"Company Stock Symbol";
+    
+    
     if([self.title isEqualToString: @"Edit Company"]) {
         self.deleteBtnProperty.hidden = false;
         self.companyName.text = self.editCompany.name;
+        self.productURL.placeholder = @"Company Stock Symbol";
+        self.productURL.text = self.editCompany.stockName;
         
     } else if([self.title isEqualToString: @"New Product"]){
         self.deleteBtnProperty.hidden = true;
         self.companyName.placeholder = @"Product Name";
-        self.productURL.hidden = false;
+        //self.productURL.hidden = false;
         
         CALayer *border = [CALayer layer];
         CGFloat borderWidth = 2;
@@ -171,9 +183,11 @@
     } else if([self.title isEqualToString: @"New Company"]){
         NSMutableArray *list = [[NSMutableArray alloc] init];
         
-        Company *newCompany = [[Company alloc] initWithName:self.companyName.text andLogo:@"stock_company_logo.jpg" andProdList:list];
+        Company *newCompany = [[Company alloc] initWithName:self.companyName.text andLogo:@"stock_company_logo.jpg" andProdList:list andStockName:self.productURL.text];
         
         [self.mySharedData.companyList addObject:newCompany];
+        
+        
         
         [self.navigationController popViewControllerAnimated:true];
         

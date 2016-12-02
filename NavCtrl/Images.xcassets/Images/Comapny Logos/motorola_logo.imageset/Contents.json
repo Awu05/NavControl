@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "motorola_logo.jpg",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "oneplus-2@2x.jpg",
       "scale" : "2x"
     },
     {

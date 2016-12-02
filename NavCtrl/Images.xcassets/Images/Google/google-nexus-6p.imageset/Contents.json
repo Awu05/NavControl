@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "google-nexus-6p.jpg",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "oneplus-x@2x.jpg",
       "scale" : "2x"
     },
     {

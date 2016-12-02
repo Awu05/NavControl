@@ -53,7 +53,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
-    
+    [self getStockPrice];
     [self.tableView reloadData];
 }
 
@@ -84,12 +84,15 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
     // Configure the cell...
     Company *company = [self.mySharedData.companyList objectAtIndex:[indexPath row]];
-    cell.textLabel.text = company.name;
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ (%@)", company.name, company.stockName];
+    
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"$ %.4f", company.stockPrice];
+    
     cell.imageView.image = company.image;
     
     return cell;
@@ -118,7 +121,7 @@
     }
     else {
         self.productViewController.currentCompany = company;
-        
+        self.productViewController.title = company.name;
         [self.navigationController
          pushViewController:self.productViewController
          animated:YES];
@@ -147,7 +150,6 @@
     
 }
 
-
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }
@@ -156,6 +158,58 @@
     NSString *stringToMove = [self.mySharedData.companyList objectAtIndex:sourceIndexPath.row];
     [self.mySharedData.companyList removeObjectAtIndex:sourceIndexPath.row];
     [self.mySharedData.companyList insertObject:stringToMove atIndex:destinationIndexPath.row];
+}
+
+- (void) getStockPrice {
+    self.tickers = [[NSMutableString alloc] init];
+    
+    for (Company *company in self.mySharedData.companyList) {
+        //[self.tickers addObject:company.stockName];
+        [self.tickers appendString: company.stockName];
+        [self.tickers appendString: @"+"];
+    }
+    NSLog(@"Tickers: %@\n", self.tickers);
+    
+    NSString *tickerURL = [NSString stringWithFormat:@"http://finance.yahoo.com/d/quotes.csv?s=%@&f=a", self.tickers];
+    
+    // 1
+    NSString *dataUrl = tickerURL;
+    NSURL *url = [NSURL URLWithString:dataUrl];
+    
+    // 2
+    NSURLSessionDataTask *downloadTask = [[NSURLSession sharedSession]
+                                          dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                              // 4: Handle response here
+                                              dispatch_async(dispatch_get_main_queue(), ^{
+                                                  [self assignStockPrice:data];
+                                                  
+                                              });
+                                              
+                                          }];
+    
+    // 3
+    [downloadTask resume];
+    
+    //NSLog(@"Stock Price %@\n", tickerURL);
+    
+}
+
+- (void) assignStockPrice: (NSData*) data {
+    self.stockPrice = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    //NSLog(@"Price: %@\n", self.stockPrice);
+    
+    NSArray *wordList = [self.stockPrice componentsSeparatedByString:@"\n"];
+    //NSLog(@"WordList %@\n", wordList);
+    
+    int i = 0;
+    for (Company *company in self.mySharedData.companyList) {
+        double price = [wordList[i] doubleValue];
+        company.stockPrice = price;
+        i++;
+    }
+    
+    [self.tableView reloadData];
+    
 }
 
 @end

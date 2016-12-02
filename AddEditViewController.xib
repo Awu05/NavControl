@@ -39,7 +39,7 @@
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Product URL" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1fn-6v-hpr">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Product URL" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1fn-6v-hpr">
                     <rect key="frame" x="16" y="555" width="343" height="22"/>
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "DataAccessObject.h"
+#import "Company.h"
 
 @class ProductViewController;
 
@@ -17,5 +18,12 @@
 
 @property (nonatomic, retain) IBOutlet  ProductViewController * productViewController;
 
+@property (nonatomic, retain) NSString *stockPrice;
+
+@property (nonatomic, retain) NSMutableString *tickers;
+
+- (void) getStockPrice;
+
+- (void) assignStockPrice: (NSData*) data;
 
 @end
