@@ -168,7 +168,7 @@
         [self.tickers appendString: company.stockName];
         [self.tickers appendString: @"+"];
     }
-    NSLog(@"Tickers: %@\n", self.tickers);
+    //NSLog(@"Tickers: %@\n", self.tickers);
     
     NSString *tickerURL = [NSString stringWithFormat:@"http://finance.yahoo.com/d/quotes.csv?s=%@&f=a", self.tickers];
     
