@@ -8,6 +8,8 @@
 
 #import "NavControllerAppDelegate.h"
 #import "CompanyViewController.h"
+#import "CompaniesViewController.h"
+#import "DataAccessObject.h"
 
 @implementation NavControllerAppDelegate
 
@@ -16,8 +18,8 @@
     
     // Override point for customization after application launch.
     UIViewController *rootController =
-    [[CompanyViewController alloc]
-     initWithNibName:@"CompanyViewController" bundle:nil];
+    [[CompaniesViewController alloc]
+     initWithNibName:@"CompaniesViewController" bundle:nil];
     
     self.navigationController = [[UINavigationController alloc]
                             initWithRootViewController:rootController];
@@ -63,7 +65,11 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:
+    DataAccessObject *DAO = [DataAccessObject sharedManager];
+    [DAO saveContext];
 }
+
+
 
 @end

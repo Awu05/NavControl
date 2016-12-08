@@ -2,4 +2,54 @@
 <Bucket
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NavCtrl/CompaniesViewController.m"
+            timestampString = "502928583.028351"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "205"
+            endingLineNumber = "205"
+            landmarkName = "-getStockPrice"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[CompaniesViewController getStockPrice]"
+                  moduleName = "NavCtrl"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/andywu/Desktop/TurnToTech/NavControl/NavCtrl/NavCtrl/CompaniesViewController.m"
+                  timestampString = "502833545.311578"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "167"
+                  endingLineNumber = "167"
+                  offsetFromSymbolStart = "142">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[CompaniesViewController getStockPrice]"
+                  moduleName = "NavCtrl"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/andywu/Desktop/TurnToTech/NavControl/NavCtrl/NavCtrl/CompaniesViewController.m"
+                  timestampString = "502833545.32196"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "167"
+                  endingLineNumber = "167"
+                  offsetFromSymbolStart = "150">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

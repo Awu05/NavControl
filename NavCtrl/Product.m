@@ -29,6 +29,7 @@
         self.productName = name;
         self.productImage = [UIImage imageNamed:imageName];
         self.productURL = prodURL;
+        self.imageFileName = imageName;
     }
     return self;
 }

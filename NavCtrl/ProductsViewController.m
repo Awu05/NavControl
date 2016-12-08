@@ -1,30 +1,21 @@
 //
-//  ProductViewController.m
+//  ProductsViewController.m
 //  NavCtrl
 //
-//  Created by Aditya Narayan on 10/22/13.
-//  Copyright (c) 2013 Aditya Narayan. All rights reserved.
+//  Created by Andy Wu on 12/7/16.
+//  Copyright © 2016 Aditya Narayan. All rights reserved.
 //
 
-#import "ProductViewController.h"
+#import "ProductsViewController.h"
 #import "ProductPageViewController.h"
 #import "Product.h"
 #import "AddEditViewController.h"
 
-@interface ProductViewController ()
+@interface ProductsViewController ()
 
 @end
 
-@implementation ProductViewController
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+@implementation ProductsViewController
 
 - (void)viewDidLoad
 {
@@ -33,8 +24,8 @@
     self.mySharedData = [DataAccessObject sharedManager];
     
     // Uncomment the following line to preserve selection between presentations.
-     self.clearsSelectionOnViewWillAppear = NO;
- 
+    //self.clearsSelectionOnViewWillAppear = NO;
+    
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     //self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
@@ -45,11 +36,28 @@
                                                initWithTarget:self action:@selector(longPressGestureRecognized:)];
     [self.tableView addGestureRecognizer:longPress];
     
+    self.companyName.text = [NSString stringWithFormat:@"%@ (%@)", self.currentCompany.name, self.currentCompany.stockName];
+    
+    NSString *companyLogo = self.currentCompany.imageFileName;
+    
+    UIImage *image = [UIImage imageNamed: companyLogo];
+    
+    [self.companyIcon setImage:image];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
+    
+    if([self.currentCompany.productList count] == 0){
+        self.tableView.hidden = true;
+        self.noProduct.hidden = false;
+    }
+    else {
+        self.tableView.hidden = false;
+        self.noProduct.hidden = true;
+    }
     
     [self.tableView reloadData];
 }
@@ -166,14 +174,14 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-//#warning Potentially incomplete method implementation.
+    //#warning Potentially incomplete method implementation.
     // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//#warning Incomplete method implementation.
+    //#warning Incomplete method implementation.
     // Return the number of rows in the section.
     return [self.currentCompany.productList count];
 }
@@ -236,6 +244,15 @@
         [self.currentCompany.productList removeObjectAtIndex:[indexPath row]];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
         [tableView reloadData]; // tell table to refresh now
+        
+        if([self.currentCompany.productList count] == 0){
+            self.tableView.hidden = true;
+            self.noProduct.hidden = false;
+        }
+        else {
+            self.tableView.hidden = false;
+            self.noProduct.hidden = true;
+        }
     }
 }
 
@@ -268,6 +285,20 @@
     snapshot.layer.shadowOpacity = 0.4;
     
     return snapshot;
+}
+
+- (void)dealloc {
+    [_tableView release];
+    [_companyIcon release];
+    [_companyName release];
+    [_noProduct release];
+    [super dealloc];
+}
+- (IBAction)addProduct:(id)sender {
+    AddEditViewController *addEdit = [[AddEditViewController alloc] init];
+    addEdit.title = @"New Product";
+    addEdit.editCompany = self.currentCompany;
+    [self.navigationController pushViewController:addEdit animated:YES];
 }
 
 @end

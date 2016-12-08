@@ -1,53 +1,48 @@
 //
-//  CompanyViewController.m
+//  CompaniesViewController.m
 //  NavCtrl
 //
-//  Created by Aditya Narayan on 10/22/13.
-//  Copyright (c) 2013 Aditya Narayan. All rights reserved.
+//  Created by Andy Wu on 12/6/16.
+//  Copyright © 2016 Aditya Narayan. All rights reserved.
 //
 
-#import "CompanyViewController.h"
+#import "CompaniesViewController.h"
 #import "ProductViewController.h"
 #import "Company.h"
 #import "Product.h"
 #import "AddEditViewController.h"
 #import "DataAccessObject.h"
 
-@interface CompanyViewController ()
+@interface CompaniesViewController ()
 
 @end
 
-@implementation CompanyViewController
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+@implementation CompaniesViewController
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-
+    
+    
     self.mySharedData = [DataAccessObject sharedManager];
-
+    
+    self.tableView.allowsSelectionDuringEditing = YES;
+    
     UIBarButtonItem *addButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addAction:)];
     self.navigationItem.rightBarButtonItem = addButtonItem;
     
     // Uncomment the following line to preserve selection between presentations.
-     self.clearsSelectionOnViewWillAppear = NO;
- 
+    //self.tableView.clearsSelectionOnViewWillAppear = NO;
+    
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+
+    UIBarButtonItem *editButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(editAction:)];
+    
+    self.navigationItem.leftBarButtonItem = editButtonItem;
     
     
     self.title = @"Mobile device makers";
     
-    
+    [super viewDidLoad];
     
 }
 
@@ -55,6 +50,16 @@
     
     [super viewWillAppear:animated];
     [self getStockPrice];
+    
+    if([self.mySharedData.companyList count] == 0){
+        self.tableView.hidden = true;
+        self.noCompanies.hidden = false;
+    }
+    else {
+        self.tableView.hidden = false;
+        self.noCompanies.hidden = true;
+    }
+    
     [self.tableView reloadData];
 }
 
@@ -68,14 +73,14 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-//#warning Incomplete method implementation.
+    //#warning Incomplete method implementation.
     // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//#warning Incomplete method implementation.
+    //#warning Incomplete method implementation.
     // Return the number of rows in the section.
     return [self.mySharedData.companyList count];
 }
@@ -96,6 +101,7 @@
     
     cell.imageView.image = company.image;
     
+    
     return cell;
 }
 
@@ -107,8 +113,22 @@
     
 }
 
-- (void) undoAction: (id) sender {
-    NSLog(@"UNDOING RECENT CHANGES!\n");
+- (void) editAction: (id)sender {
+    
+    if ( [self.tableView isEditing] )
+    {
+        [self.tableView setEditing:NO animated:YES];
+        self.navigationItem.leftBarButtonItem.title = @"Edit";
+        self.undo.hidden = true;
+        self.redo.hidden = true;
+    } else
+    {
+        [self.tableView setEditing:YES animated:YES];
+        self.navigationItem.leftBarButtonItem.title = @"Done";
+        self.undo.hidden = false;
+        self.redo.hidden = false;
+    }
+    
 }
 
 #pragma mark - Table view delegate
@@ -118,24 +138,25 @@
 {
     Company *company = [self.mySharedData.companyList objectAtIndex:[indexPath row]];
     
-    if(tableView.editing == YES) {
+    if(self.tableView.editing == YES) {
         AddEditViewController *addEdit = [[AddEditViewController alloc] init];
         addEdit.title = @"Edit Company";
         addEdit.editCompany = company;
         [self.navigationController pushViewController:addEdit animated:YES];
     }
     else {
-        self.productViewController.currentCompany = company;
-        self.productViewController.title = company.name;
-        [self.navigationController
-         pushViewController:self.productViewController
-         animated:YES];
+        
+        ProductsViewController * productsviewController = [[ProductsViewController alloc] init];
+        productsviewController.currentCompany = company;
+        productsviewController.title = company.name;
+        [self.navigationController pushViewController:productsviewController animated:YES];
+        
     }
     
     
-
+    
 }
- 
+
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }
@@ -153,6 +174,15 @@
         [self.mySharedData.companyList removeObjectAtIndex:[indexPath row]];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
         [tableView reloadData]; // tell table to refresh now
+        
+        if([self.mySharedData.companyList count] == 0){
+            self.tableView.hidden = true;
+            self.noCompanies.hidden = false;
+        }
+        else {
+            self.tableView.hidden = false;
+            self.noCompanies.hidden = true;
+        }
         
     }
     
@@ -221,5 +251,49 @@
     [self.tableView reloadData];
     
 }
+
+- (IBAction)redoBtn:(id)sender {
+    NSLog(@"REDOING RECENT CHANGES!\n");
+    //[self.mySharedData.persistentContainer.viewContext redo];
+    [self.tableView reloadData];
+}
+
+- (IBAction)undoBtn:(id)sender {
+    NSLog(@"UNDOING RECENT CHANGES!\n");
+    
+    [self.mySharedData.persistentContainer.viewContext undo];
+    [self.mySharedData loadCompanies];
+    
+    if([self.mySharedData.companyList count] == 0){
+        self.tableView.hidden = true;
+        self.noCompanies.hidden = false;
+    }
+    else {
+        self.tableView.hidden = false;
+        self.noCompanies.hidden = true;
+    }
+    
+    [self getStockPrice];
+    [self.tableView reloadData];
+
+    
+    
+}
+
+- (IBAction)addCompany:(id)sender {
+    AddEditViewController *addEdit = [[AddEditViewController alloc] init];
+    addEdit.title = @"New Company";
+    [self.navigationController pushViewController:addEdit animated:YES];
+}
+
+- (void)dealloc {
+    [_tableView release];
+    [_redo release];
+    [_undo release];
+    [_noCompanies release];
+    [super dealloc];
+}
+
+
 
 @end

@@ -11,9 +11,14 @@
 #import "Company.h"
 #import "Product.h"
 #import "ProductViewController.h"
+#import <CoreData/CoreData.h>
 
 
-@interface AddEditViewController : UIViewController
+@interface AddEditViewController : UIViewController {
+    
+    NSManagedObjectContext *context;
+    
+}
 
 @property (nonatomic, retain) DataAccessObject *mySharedData;
 

@@ -31,6 +31,7 @@
         self.image = [UIImage imageNamed:logoName];
         self.productList = prodList;
         self.stockName = ticker;
+        self.imageFileName = logoName;
     }
     return self;
 }

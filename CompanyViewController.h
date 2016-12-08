@@ -12,7 +12,7 @@
 
 @class ProductViewController;
 
-@interface CompanyViewController : UITableViewController
+@interface CompanyViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, retain) DataAccessObject *mySharedData;
 

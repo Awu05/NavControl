@@ -15,8 +15,9 @@
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) UIImage *image;
 @property (nonatomic, retain) NSMutableArray *productList;
-@property (nonatomic, retain) NSString *logoURL;
 @property (nonatomic, retain) NSString *stockName;
+@property (nonatomic, retain) NSString *imageFileName;
+
 @property double stockPrice;
 
 - (instancetype)initWithName: (NSString*) name

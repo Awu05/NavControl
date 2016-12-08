@@ -10,6 +10,7 @@
 #import "CompanyViewController.h"
 #import "Company.h"
 #import "ProductViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface AddEditViewController ()
 
@@ -75,6 +76,8 @@
         [self.productURL.layer addSublayer:border];
         self.productURL.layer.masksToBounds = YES;
         
+        self.productURL.placeholder = @"Product Link";
+        
     } else if([self.title isEqualToString: @"Edit Product"]){
         self.deleteBtnProperty.hidden = false;
         self.companyName.text = self.editProduct.productName;
@@ -89,6 +92,8 @@
         border.borderWidth = borderWidth;
         [self.productURL.layer addSublayer:border];
         self.productURL.layer.masksToBounds = YES;
+        
+        self.productURL.placeholder = @"Product Link";
     }
     
     self.keyboardOut = 0;
@@ -121,6 +126,8 @@
              newFrame.origin.y -= height; // tweak here to adjust the moving position
              
              [self.view setFrame:newFrame];
+             
+             
          }
          
          
@@ -137,9 +144,12 @@
          
          int height = MIN(keyboardSize.height,keyboardSize.width);
          
+         
          CGRect newFrame = [self.view frame];
          newFrame.origin.y += height; // tweak here to adjust the moving position
          [self.view setFrame:newFrame];
+         
+         
          
          self.keyboardOut = 0;
          
@@ -176,8 +186,13 @@
     //NSLog(@"Save Button Pressed!\n");
     
     if([self.title isEqualToString: @"Edit Company"]) {
+        Company *editedCompany = [[Company alloc] initWithName:self.companyName.text andLogo:self.editCompany.imageFileName andProdList:self.editCompany.productList andStockName:self.productURL.text];
+        
+        [self.mySharedData editCompany:self.editCompany andEditedCompany:editedCompany];
+        
         self.editCompany.name = self.companyName.text;
-
+        self.editCompany.stockName = self.productURL.text;
+        
         [self.navigationController popViewControllerAnimated:true];
         
     } else if([self.title isEqualToString: @"New Company"]){
@@ -187,7 +202,7 @@
         
         [self.mySharedData.companyList addObject:newCompany];
         
-        
+        [self.mySharedData saveCompany:newCompany];
         
         [self.navigationController popViewControllerAnimated:true];
         
@@ -195,10 +210,16 @@
         Product *newProduct = [[Product alloc] initWithName:self.companyName.text andImage:@"stock_product.jpg" andProdURL:self.productURL.text];
         
         [self.editCompany.productList addObject:newProduct];
-
+        
+        [self.mySharedData saveProduct:self.editCompany andProduct:newProduct];
+        
         [self.navigationController popViewControllerAnimated:true];
         
     } else if([self.title isEqualToString: @"Edit Product"]){
+        Product *editedProduct = [[Product alloc] initWithName:self.companyName.text andImage:self.editProduct.imageFileName andProdURL:self.productURL.text];
+        
+        [self.mySharedData editProduct:self.editCompany andOldProduct:self.editProduct andEditedProduct:editedProduct];
+        
         self.editProduct.productName = self.companyName.text;
         self.editProduct.productURL = self.productURL.text;
         
@@ -220,12 +241,12 @@
     
     if([self.title isEqualToString: @"Edit Company"]) {
         [self.mySharedData.companyList removeObject:self.editCompany];
-
+        //[self saveChanges];
         [self.navigationController popViewControllerAnimated:true];
     }
     else if([self.title isEqualToString: @"Edit Product"]){
         [self.editCompany.productList removeObject:self.editProduct];
-        
+        //[self saveChanges];
         [self.navigationController popToViewController:self.viewcontrollers[1] animated:YES];
     }
 }

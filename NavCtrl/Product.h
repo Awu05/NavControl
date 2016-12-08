@@ -13,6 +13,7 @@
 @property (nonatomic, retain) NSString *productName;
 @property (nonatomic, retain) UIImage *productImage;
 @property (nonatomic, retain) NSString *productURL;
+@property (nonatomic, retain) NSString *imageFileName;
 
 
 

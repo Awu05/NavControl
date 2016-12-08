@@ -16,7 +16,8 @@
 @interface ProductViewController : UITableViewController
 
 @property (nonatomic, retain) Company *currentCompany;
-//@property (nonatomic, retain) DataAccessObject *mySharedData;
+
+@property (nonatomic, retain) DataAccessObject *mySharedData;
 
 @property (nonatomic, retain) IBOutlet ProductPageViewController *productPageViewController;
 

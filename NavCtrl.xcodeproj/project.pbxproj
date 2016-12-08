@@ -23,7 +23,13 @@
 		48A656E718163C1B00746D36 /* CompanyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48A656E518163C1B00746D36 /* CompanyViewController.xib */; };
 		48A656EB18163F8700746D36 /* ProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48A656E918163F8700746D36 /* ProductViewController.m */; };
 		48A656EE1816468000746D36 /* Sunflower.gif in Resources */ = {isa = PBXBuildFile; fileRef = 48A656ED1816468000746D36 /* Sunflower.gif */; };
+		E815BA831DF22E0A00A57AD0 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E815BA811DF22E0A00A57AD0 /* Model.xcdatamodeld */; };
 		E818867F1DEE10F500759706 /* ProductPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E818867E1DEE10F500759706 /* ProductPageViewController.m */; };
+		E8A7B1081DF749C800730ADA /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8A7B1071DF749C800730ADA /* Launch Screen.storyboard */; };
+		E8A7B10C1DF75ABA00730ADA /* CompaniesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8A7B10A1DF75ABA00730ADA /* CompaniesViewController.m */; };
+		E8A7B10D1DF75ABA00730ADA /* CompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E8A7B10B1DF75ABA00730ADA /* CompaniesViewController.xib */; };
+		E8A7B1131DF863A400730ADA /* ProductsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8A7B1111DF863A400730ADA /* ProductsViewController.m */; };
+		E8A7B1141DF863A400730ADA /* ProductsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E8A7B1121DF863A400730ADA /* ProductsViewController.xib */; };
 		E8BA741E1DEF3BA700FDA620 /* Company.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BA741D1DEF3BA700FDA620 /* Company.m */; };
 		E8BA74211DEF3BC900FDA620 /* Product.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BA74201DEF3BC900FDA620 /* Product.m */; };
 		E8BA74261DEF466D00FDA620 /* DataAccessObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BA74251DEF466D00FDA620 /* DataAccessObject.m */; };
@@ -64,8 +70,16 @@
 		48A656E818163F8700746D36 /* ProductViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProductViewController.h; path = ../ProductViewController.h; sourceTree = "<group>"; };
 		48A656E918163F8700746D36 /* ProductViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProductViewController.m; path = ../ProductViewController.m; sourceTree = "<group>"; };
 		48A656ED1816468000746D36 /* Sunflower.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Sunflower.gif; sourceTree = "<group>"; };
+		E815BA821DF22E0A00A57AD0 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		E818867D1DEE10F500759706 /* ProductPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductPageViewController.h; sourceTree = "<group>"; };
 		E818867E1DEE10F500759706 /* ProductPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductPageViewController.m; sourceTree = "<group>"; };
+		E8A7B1071DF749C800730ADA /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		E8A7B1091DF75ABA00730ADA /* CompaniesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompaniesViewController.h; sourceTree = "<group>"; };
+		E8A7B10A1DF75ABA00730ADA /* CompaniesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompaniesViewController.m; sourceTree = "<group>"; };
+		E8A7B10B1DF75ABA00730ADA /* CompaniesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CompaniesViewController.xib; sourceTree = "<group>"; };
+		E8A7B1101DF863A400730ADA /* ProductsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductsViewController.h; sourceTree = "<group>"; };
+		E8A7B1111DF863A400730ADA /* ProductsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductsViewController.m; sourceTree = "<group>"; };
+		E8A7B1121DF863A400730ADA /* ProductsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductsViewController.xib; sourceTree = "<group>"; };
 		E8BA741C1DEF3BA700FDA620 /* Company.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Company.h; sourceTree = "<group>"; };
 		E8BA741D1DEF3BA700FDA620 /* Company.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Company.m; sourceTree = "<group>"; };
 		E8BA741F1DEF3BC900FDA620 /* Product.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Product.h; sourceTree = "<group>"; };
@@ -115,6 +129,9 @@
 			children = (
 				48A656E318163C1B00746D36 /* CompanyViewController.h */,
 				48A656E418163C1B00746D36 /* CompanyViewController.m */,
+				E8A7B1091DF75ABA00730ADA /* CompaniesViewController.h */,
+				E8A7B10A1DF75ABA00730ADA /* CompaniesViewController.m */,
+				E8A7B10B1DF75ABA00730ADA /* CompaniesViewController.xib */,
 			);
 			name = ParentViewController;
 			sourceTree = "<group>";
@@ -124,6 +141,9 @@
 			children = (
 				48A656E818163F8700746D36 /* ProductViewController.h */,
 				48A656E918163F8700746D36 /* ProductViewController.m */,
+				E8A7B1101DF863A400730ADA /* ProductsViewController.h */,
+				E8A7B1111DF863A400730ADA /* ProductsViewController.m */,
+				E8A7B1121DF863A400730ADA /* ProductsViewController.xib */,
 			);
 			name = ProductViewController;
 			sourceTree = "<group>";
@@ -131,6 +151,7 @@
 		48A656A818163BF200746D36 = {
 			isa = PBXGroup;
 			children = (
+				E8A7B1071DF749C800730ADA /* Launch Screen.storyboard */,
 				48A656BA18163BF200746D36 /* NavCtrl */,
 				48A656D318163BF200746D36 /* NavCtrlTests */,
 				48A656B318163BF200746D36 /* Frameworks */,
@@ -238,6 +259,7 @@
 			children = (
 				E8BA74241DEF466D00FDA620 /* DataAccessObject.h */,
 				E8BA74251DEF466D00FDA620 /* DataAccessObject.m */,
+				E815BA811DF22E0A00A57AD0 /* Model.xcdatamodeld */,
 			);
 			name = DataGroup;
 			sourceTree = "<group>";
@@ -328,10 +350,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8A7B1081DF749C800730ADA /* Launch Screen.storyboard in Resources */,
 				48A656EE1816468000746D36 /* Sunflower.gif in Resources */,
 				48A656E718163C1B00746D36 /* CompanyViewController.xib in Resources */,
+				E8A7B10D1DF75ABA00730ADA /* CompaniesViewController.xib in Resources */,
 				48A656BF18163BF200746D36 /* InfoPlist.strings in Resources */,
 				E8BA74351DF083AB00FDA620 /* AddEditViewController.xib in Resources */,
+				E8A7B1141DF863A400730ADA /* ProductsViewController.xib in Resources */,
 				48A656C718163BF200746D36 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -352,13 +377,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8BA74261DEF466D00FDA620 /* DataAccessObject.m in Sources */,
+				E8A7B10C1DF75ABA00730ADA /* CompaniesViewController.m in Sources */,
 				E8BA74211DEF3BC900FDA620 /* Product.m in Sources */,
 				E8BA74341DF083AB00FDA620 /* AddEditViewController.m in Sources */,
 				48A656E618163C1B00746D36 /* CompanyViewController.m in Sources */,
 				E8BA741E1DEF3BA700FDA620 /* Company.m in Sources */,
 				48A656C518163BF200746D36 /* NavControllerAppDelegate.m in Sources */,
 				E818867F1DEE10F500759706 /* ProductPageViewController.m in Sources */,
+				E815BA831DF22E0A00A57AD0 /* Model.xcdatamodeld in Sources */,
 				48A656C118163BF200746D36 /* main.m in Sources */,
+				E8A7B1131DF863A400730ADA /* ProductsViewController.m in Sources */,
 				48A656EB18163F8700746D36 /* ProductViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -493,8 +521,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NavCtrl/NavCtrl-Prefix.pch";
 				INFOPLIST_FILE = "NavCtrl/NavCtrl-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "qcd.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -508,8 +538,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NavCtrl/NavCtrl-Prefix.pch";
 				INFOPLIST_FILE = "NavCtrl/NavCtrl-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "qcd.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -587,6 +619,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		E815BA811DF22E0A00A57AD0 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				E815BA821DF22E0A00A57AD0 /* Model.xcdatamodel */,
+			);
+			currentVersion = E815BA821DF22E0A00A57AD0 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 48A656A918163BF200746D36 /* Project object */;
 }
