@@ -28,7 +28,7 @@
     self = [super init];
     if (self) {
         
-        self.companyList = [[NSMutableArray alloc] init];
+        _companyList = [[NSMutableArray alloc] init];
         self.managedCompanyList = [NSMutableArray array];
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -117,12 +117,17 @@
         for(ManagedProduct *mP in mC.products) {
             Product *addProduct = [[Product alloc] initWithName:mP.productName andImage:mP.productImage andProdURL:mP.productURL];
             [prodList addObject:addProduct];
+            
+            [addProduct release];
         }
         
         Company *addCompany = [[Company alloc] initWithName:mC.name andLogo:mC.image andProdList:prodList andStockName:mC.tickerSymbol];
         
         [self.companyList addObject:addCompany];
         [self.managedCompanyList addObject:mC];
+        
+        [addCompany release];
+        //[prodList release];
     }
     //NSLog(@"%@\n", self.managedCompanyList);
 }
@@ -200,6 +205,8 @@
     //[self.persistentContainer.viewContext ];
     
     [self saveContext];
+    
+    
 }
 
 - (void) editCompany:(Company *) oldCompany andEditedCompany: (Company *) newCompany{
@@ -245,6 +252,8 @@
     
     [self.companyList addObject: apple];
     
+    
+    
     //--------------------------------------
     
     Product *galaxyS4 = [[Product alloc] initWithName:@"Galaxy S4" andImage:@"samsung_s4.jpg" andProdURL:@"http://www.samsung.com/us/"];
@@ -259,6 +268,8 @@
     Company *samsung = [[Company alloc] initWithName:@"Samsung Mobile Devices" andLogo:@"Samsung_Logo.jpg" andProdList:samsungProducts andStockName:@"SMSD.L"];
     
     [self.companyList addObject: samsung];
+    
+    
     
     //--------------------------------------
     
@@ -275,6 +286,8 @@
     
     [self.companyList addObject: google];
     
+    
+    
     //--------------------------------------
     
     Product *droid_turbo2 = [[Product alloc] initWithName:@"Motorola Droid Turbo 2" andImage:@"motorola-droid-turbo-2.jpg" andProdURL:@"https://www.motorola.com/us/products/moto-smartphones"];
@@ -289,6 +302,7 @@
     Company *motorola = [[Company alloc] initWithName:@"Motorola Mobile Devices" andLogo:@"motorola_logo.jpg" andProdList:motoProducts andStockName:@"MSI"];
     
     [self.companyList addObject: motorola];
+    
     
     
     //--------------------------------------
@@ -317,6 +331,33 @@
     }
     
     [self saveContext];
+    
+    [iPad release];
+    [iPod_Touch release];
+    [iPhone release];
+    //[apple release];
+    
+    [galaxyS4 release];
+    [galaxyNote release];
+    [galaxyTab release];
+    //[samsung release];
+    
+    [google_pixel release];
+    [nexus5x release];
+    [nexus6p release];
+    //[google release];
+    
+    [droid_turbo2 release];
+    [moto_x release];
+    [moto_z release];
+    //[motorola release];
+}
+
+- (void)dealloc {
+    [_companyList release];
+    [_managedCompanyList release];
+    
+    [super dealloc];
 }
 
 @end

@@ -7,19 +7,12 @@
 //
 
 #import "AddEditViewController.h"
-#import "CompanyViewController.h"
+#import "CompaniesViewController.h"
 #import "Company.h"
-#import "ProductViewController.h"
+#import "ProductsViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface AddEditViewController ()
-
-
-@property (retain, nonatomic) IBOutlet UITextField *companyName;
-@property (retain, nonatomic) IBOutlet UITextField *productURL;
-
-- (IBAction)deleteBtn:(id)sender;
-@property (retain, nonatomic) IBOutlet UIButton *deleteBtnProperty;
 
 @end
 
@@ -29,13 +22,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.viewcontrollers = self.navigationController.viewControllers;
+    //self.viewcontrollers = self.navigationController.viewControllers;
     
     UIBarButtonItem *cancelButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelAction:)];
     self.navigationItem.leftBarButtonItem = cancelButtonItem;
     
+    [cancelButtonItem release];
+    
     UIBarButtonItem *saveButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveAction:)];
     self.navigationItem.rightBarButtonItem = saveButtonItem;
+    
+    [saveButtonItem release];
     
     self.mySharedData = [DataAccessObject sharedManager];
     
@@ -102,7 +99,6 @@
    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardWillHideNotification object:nil];
 
-    
     
 }
 
@@ -193,7 +189,9 @@
         self.editCompany.name = self.companyName.text;
         self.editCompany.stockName = self.productURL.text;
         
-        [self.navigationController popViewControllerAnimated:true];
+        [self.navigationController popViewControllerAnimated:YES];
+        
+        [editedCompany release];
         
     } else if([self.title isEqualToString: @"New Company"]){
         NSMutableArray *list = [[NSMutableArray alloc] init];
@@ -206,6 +204,9 @@
         
         [self.navigationController popViewControllerAnimated:true];
         
+        [newCompany release];
+        [list release];
+        
     } else if([self.title isEqualToString: @"New Product"]){
         Product *newProduct = [[Product alloc] initWithName:self.companyName.text andImage:@"stock_product.jpg" andProdURL:self.productURL.text];
         
@@ -215,6 +216,8 @@
         
         [self.navigationController popViewControllerAnimated:true];
         
+        [newProduct release];
+        
     } else if([self.title isEqualToString: @"Edit Product"]){
         Product *editedProduct = [[Product alloc] initWithName:self.companyName.text andImage:self.editProduct.imageFileName andProdURL:self.productURL.text];
         
@@ -223,7 +226,9 @@
         self.editProduct.productName = self.companyName.text;
         self.editProduct.productURL = self.productURL.text;
         
-        [self.navigationController popToViewController:self.viewcontrollers[1] animated:YES];
+        [self.navigationController popToViewController:self.navigationController.viewControllers[1] animated:YES];
+        
+        [editedProduct release];
     }
     
     
@@ -231,13 +236,17 @@
 }
 
 - (void)dealloc {
+    [_editCompany release];
+    [_editProduct release];
+    [_viewcontrollers release];
+    [_mySharedData release];
     [_companyName release];
-    [_productURL release];
     [_deleteBtnProperty release];
+    [_productURL release];
     [super dealloc];
 }
 
-- (IBAction)deleteBtn:(id)sender {
+- (void)deleteBtn:(id)sender {
     
     if([self.title isEqualToString: @"Edit Company"]) {
         [self.mySharedData.companyList removeObject:self.editCompany];
@@ -247,7 +256,7 @@
     else if([self.title isEqualToString: @"Edit Product"]){
         [self.editCompany.productList removeObject:self.editProduct];
         //[self saveChanges];
-        [self.navigationController popToViewController:self.viewcontrollers[1] animated:YES];
+        [self.navigationController popToViewController:self.navigationController.viewControllers[1] animated:YES];
     }
 }
 

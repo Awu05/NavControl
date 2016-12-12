@@ -29,7 +29,7 @@
 
 @property (nonatomic, retain) DataAccessObject *mySharedData;
 
-@property (nonatomic, retain) IBOutlet ProductPageViewController *productPageViewController;
+@property (nonatomic, retain) ProductPageViewController *productPageViewController;
 
 
 

@@ -30,7 +30,7 @@
 
 @property (retain, nonatomic) IBOutlet UITableView *tableView;
 
-@property (nonatomic, retain) IBOutlet  ProductsViewController * productsViewController;
+//@property (nonatomic, retain)  ProductsViewController * productsViewController;
 
 @property (nonatomic, retain) NSString *stockPrice;
 

@@ -7,7 +7,6 @@
 //
 
 #import "ProductPageViewController.h"
-#import "ProductViewController.h"
 #import "AddEditViewController.h"
 
 @interface ProductPageViewController ()
@@ -21,19 +20,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    
-    
     WKWebViewConfiguration *theConfiguration = [[WKWebViewConfiguration alloc] init];
     
-    WKWebView *webView = [[WKWebView alloc] initWithFrame:self.view.frame configuration:theConfiguration];
+    _webView = [[WKWebView alloc] initWithFrame:self.view.frame configuration:theConfiguration];
     
-    NSURL *nsurl=[NSURL URLWithString:self.product.productURL];
+    [self.view addSubview:self.webView];
     
-    NSURLRequest *nsrequest=[NSURLRequest requestWithURL:nsurl];
-    
-    [webView loadRequest:nsrequest];
-    
-    [self.view addSubview:webView];
+    [theConfiguration release];
 }
 
 
@@ -45,6 +38,12 @@
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
+    
+    NSURL *nsurl=[NSURL URLWithString:self.product.productURL];
+    
+    NSURLRequest *nsrequest=[NSURLRequest requestWithURL:nsurl];
+    
+    [self.webView loadRequest:nsrequest];
     
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
@@ -61,14 +60,24 @@
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
     
+    [super setEditing:editing animated:animated];
+  
     AddEditViewController *addEdit = [[AddEditViewController alloc] init];
     addEdit.title = @"Edit Product";
     addEdit.editProduct = self.product;
     addEdit.editCompany = self.currentProductCompany;
     [self.navigationController pushViewController:addEdit animated:YES];
+    [addEdit release];
     
     
-    [super setEditing:editing animated:animated];
+ }
+
+- (void) dealloc {
+    [_product release];
+    [_webView release];
+    [_currentProductCompany release];
+    
+    [super dealloc];
 }
 
 @end

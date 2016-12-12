@@ -23,6 +23,8 @@
     
     self.mySharedData = [DataAccessObject sharedManager];
     
+    _productPageViewController = [[ProductPageViewController alloc] init];
+    
     // Uncomment the following line to preserve selection between presentations.
     //self.clearsSelectionOnViewWillAppear = NO;
     
@@ -32,9 +34,13 @@
     UIBarButtonItem *addButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addAction:)];
     self.navigationItem.rightBarButtonItem = addButtonItem;
     
+    [addButtonItem release];
+    
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]
                                                initWithTarget:self action:@selector(longPressGestureRecognized:)];
     [self.tableView addGestureRecognizer:longPress];
+    
+    [longPress release];
     
     self.companyName.text = [NSString stringWithFormat:@"%@ (%@)", self.currentCompany.name, self.currentCompany.stockName];
     
@@ -75,9 +81,10 @@
     addEdit.editCompany = self.currentCompany;
     [self.navigationController pushViewController:addEdit animated:YES];
     
+    [addEdit release];
 }
 
-- (IBAction)longPressGestureRecognized:(id)sender {
+- (void)longPressGestureRecognized:(id)sender {
     
     UILongPressGestureRecognizer *longPress = (UILongPressGestureRecognizer *)sender;
     UIGestureRecognizerState state = longPress.state;
@@ -118,9 +125,10 @@
                 } completion:^(BOOL finished) {
                     
                     cell.hidden = YES;
-                    
+                    //[snapshot release];
                 }];
             }
+            
             break;
         }
         case UIGestureRecognizerStateChanged: {
@@ -140,6 +148,7 @@
                 // ... and update source so it is in sync with UI changes.
                 sourceIndexPath = indexPath;
             }
+            
             break;
         }
         default: {
@@ -161,6 +170,8 @@
                 sourceIndexPath = nil;
                 [snapshot removeFromSuperview];
                 snapshot = nil;
+                //[snapshot release];
+
                 
             }];
             break;
@@ -193,7 +204,7 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     // Configure the cell...
     Product *companyProduct = [self.currentCompany.productList objectAtIndex:[indexPath row]];
@@ -201,6 +212,7 @@
     cell.imageView.image = companyProduct.productImage;
     
     cell.textLabel.text = companyProduct.productName;
+    
     
     return cell;
 }
@@ -212,7 +224,7 @@
 {
     Product *product = [self.currentCompany.productList objectAtIndex:[indexPath row]];
     
-    self.productPageViewController = [[ProductPageViewController alloc] init];
+    
     
     self.productPageViewController.title = product.productName;
     self.productPageViewController.currentProductCompany = self.currentCompany;
@@ -220,6 +232,7 @@
     
     // Pass the selected object to the new view controller.
     self.productPageViewController.product = product;
+    
     
     // Push the view controller.
     [self.navigationController
@@ -240,6 +253,7 @@
         DataAccessObject *DAO = [DataAccessObject sharedManager];
         Product *product = self.currentCompany.productList[indexPath.row];
         [DAO deleteProduct:self.currentCompany andProduct:product];
+        
         
         [self.currentCompany.productList removeObjectAtIndex:[indexPath row]];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
@@ -277,14 +291,17 @@
     UIGraphicsEndImageContext();
     
     // Create an image view.
-    UIView *snapshot = [[UIImageView alloc] initWithImage:image];
+    UIView *snapshot = [[[UIImageView alloc] initWithImage:image] autorelease];
     snapshot.layer.masksToBounds = NO;
     snapshot.layer.cornerRadius = 0.0;
     snapshot.layer.shadowOffset = CGSizeMake(-5.0, 0.0);
     snapshot.layer.shadowRadius = 5.0;
     snapshot.layer.shadowOpacity = 0.4;
     
+    
     return snapshot;
+    
+    
 }
 
 - (void)dealloc {
@@ -292,6 +309,10 @@
     [_companyIcon release];
     [_companyName release];
     [_noProduct release];
+    [_mySharedData release];
+    [_currentCompany release];
+    [_productPageViewController release];
+    
     [super dealloc];
 }
 - (IBAction)addProduct:(id)sender {
@@ -299,6 +320,8 @@
     addEdit.title = @"New Product";
     addEdit.editCompany = self.currentCompany;
     [self.navigationController pushViewController:addEdit animated:YES];
+    
+    [addEdit release];
 }
 
 @end

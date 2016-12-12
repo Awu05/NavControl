@@ -21,5 +21,4 @@
 @property (nonatomic, retain) Company *currentProductCompany;
 
 
-
 @end

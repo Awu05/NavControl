@@ -10,7 +10,6 @@
 #import "DataAccessObject.h"
 #import "Company.h"
 #import "Product.h"
-#import "ProductViewController.h"
 #import <CoreData/CoreData.h>
 
 
@@ -28,6 +27,14 @@
 
 @property (nonatomic, retain) NSArray *viewcontrollers;
 
+@property (retain, nonatomic) IBOutlet UITextField *companyName;
+
+@property (retain, nonatomic) IBOutlet UITextField *productURL;
+
+@property (retain, nonatomic) IBOutlet UIButton *deleteBtnProperty;
+
 @property int keyboardOut;
+
+- (IBAction)deleteBtn:(id)sender;
 
 @end

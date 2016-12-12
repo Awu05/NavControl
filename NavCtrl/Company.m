@@ -36,5 +36,14 @@
     return self;
 }
 
+- (void) dealloc {
+    [_name release];
+    [_image release];
+    [_stockName release];
+    [_productList release];
+    [_imageFileName release];
+    
+    [super dealloc];
+}
 
 @end

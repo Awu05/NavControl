@@ -7,7 +7,6 @@
 //
 
 #import "NavControllerAppDelegate.h"
-#import "CompanyViewController.h"
 #import "CompaniesViewController.h"
 #import "DataAccessObject.h"
 
@@ -21,14 +20,22 @@
     [[CompaniesViewController alloc]
      initWithNibName:@"CompaniesViewController" bundle:nil];
     
-    self.navigationController = [[UINavigationController alloc]
+    _navigationController = [[UINavigationController alloc]
                             initWithRootViewController:rootController];
     
-    self.window = [[UIWindow alloc]
+    [rootController release];
+    
+    UIWindow *window = [[UIWindow alloc]
                    initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window = window;
+    
+    [window release];
+    
+    
 //  self.window addSubview:self.navigationController.view];
     [self.window setRootViewController:self.navigationController];
     [self.window makeKeyAndVisible];
+    
     return YES;
     
     
@@ -70,6 +77,11 @@
     [DAO saveContext];
 }
 
-
+- (void) dealloc {
+    [_window release];
+    [_navigationController release];
+    
+    [super dealloc];
+}
 
 @end

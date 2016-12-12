@@ -7,7 +7,7 @@
 //
 
 #import "CompaniesViewController.h"
-#import "ProductViewController.h"
+#import "ProductsViewController.h"
 #import "Company.h"
 #import "Product.h"
 #import "AddEditViewController.h"
@@ -22,6 +22,7 @@
 - (void)viewDidLoad
 {
     
+    _tickers = [[NSMutableString alloc] init];
     
     self.mySharedData = [DataAccessObject sharedManager];
     
@@ -90,7 +91,7 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
     
     // Configure the cell...
@@ -110,7 +111,7 @@
     AddEditViewController *addEdit = [[AddEditViewController alloc] init];
     addEdit.title = @"New Company";
     [self.navigationController pushViewController:addEdit animated:YES];
-    
+    [addEdit release];
 }
 
 - (void) editAction: (id)sender {
@@ -143,6 +144,7 @@
         addEdit.title = @"Edit Company";
         addEdit.editCompany = company;
         [self.navigationController pushViewController:addEdit animated:YES];
+        [addEdit release];
     }
     else {
         
@@ -150,7 +152,7 @@
         productsviewController.currentCompany = company;
         productsviewController.title = company.name;
         [self.navigationController pushViewController:productsviewController animated:YES];
-        
+        [productsviewController release];
     }
     
     
@@ -194,14 +196,16 @@
 }
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
-    NSString *stringToMove = [self.mySharedData.companyList objectAtIndex:sourceIndexPath.row];
+    Company *company = [self.mySharedData.companyList objectAtIndex:sourceIndexPath.row];
+    [company retain];
     [self.mySharedData.companyList removeObjectAtIndex:sourceIndexPath.row];
-    [self.mySharedData.companyList insertObject:stringToMove atIndex:destinationIndexPath.row];
+    [self.mySharedData.companyList insertObject:company atIndex:destinationIndexPath.row];
+    [company release];
 }
 
 - (void) getStockPrice {
-    self.tickers = [[NSMutableString alloc] init];
-    
+    //[self.tickers autorelease];
+    [self.tickers setString: @""];
     for (Company *company in self.mySharedData.companyList) {
         //[self.tickers addObject:company.stockName];
         [self.tickers appendString: company.stockName];
@@ -229,17 +233,17 @@
     
     // 3
     [downloadTask resume];
-    
     //NSLog(@"Stock Price %@\n", tickerURL);
     
 }
 
 - (void) assignStockPrice: (NSData*) data {
-    self.stockPrice = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    _stockPrice = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     //NSLog(@"Price: %@\n", self.stockPrice);
     
     NSArray *wordList = [self.stockPrice componentsSeparatedByString:@"\n"];
     //NSLog(@"WordList %@\n", wordList);
+    
     
     int i = 0;
     for (Company *company in self.mySharedData.companyList) {
@@ -249,7 +253,7 @@
     }
     
     [self.tableView reloadData];
-    
+    [self.stockPrice release];
 }
 
 - (IBAction)redoBtn:(id)sender {
@@ -284,6 +288,7 @@
     AddEditViewController *addEdit = [[AddEditViewController alloc] init];
     addEdit.title = @"New Company";
     [self.navigationController pushViewController:addEdit animated:YES];
+    [addEdit release];
 }
 
 - (void)dealloc {
@@ -291,6 +296,11 @@
     [_redo release];
     [_undo release];
     [_noCompanies release];
+    //[_productsViewController release];
+    [_stockPrice release];
+    [_mySharedData release];
+    [_tickers release];
+    
     [super dealloc];
 }
 
